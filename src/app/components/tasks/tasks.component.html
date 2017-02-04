@@ -1,0 +1,39 @@
+<div class="page-header">
+  <h4>To Do Tasks List
+    <button class="btn btn-danger"(click)="addTask()">Add Task</button>
+  </h4>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-offset-1 col-md-10">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Id</th>
+              <th>Title</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let task of tasks;let i= index;">
+              <td>{{i}}</td>
+              <td>{{task.id}}</td>
+              <td>{{task.title}}</td>
+              <td>{{task.status}}</td>
+              <td>
+                <span class="glyphicon glyphicon-pencil edit-action" (click)="editTask(task)"></span>
+                <span class="glyphicon glyphicon-trash delete-action" (click)="deleteTask(task)"></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-add-edit [task]="currentTask" (addUpdate)="handleAddUpdate($event)"></app-add-edit>
+<app-loader *ngIf="showLoader"></app-loader>

@@ -1,0 +1,14 @@
+.modal-header
+{
+    background-color: #e5e5e5;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.form-control:focus {
+    border-color: #d9534f;
+    outline: 0;
+    box-shadow: inset 0 1px 1px rgba(217,83,79,.075), 0 0 8px rgba(217,83,79,.6);
+}
+/*#modal select option:hover, #modal select option:selected, #modal select option:focus{
+    background-color: #d9534f;
+}*/
