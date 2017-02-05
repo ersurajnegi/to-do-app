@@ -1,9 +1,4 @@
-.modal-header
-{
-    background-color: #e5e5e5;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-}
+
 .form-control:focus {
     border-color: #d9534f;
     outline: 0;

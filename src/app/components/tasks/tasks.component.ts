@@ -10,6 +10,7 @@ import { ITask } from '../../models/task';
 export class TasksComponent implements OnInit {
   tasks = Array<ITask>();
   currentTask = {};
+  taskToDelete = {};
   showLoader: boolean = true;
   constructor(private apiService: ApiService) {
 
@@ -34,9 +35,15 @@ export class TasksComponent implements OnInit {
     this.currentTask = task;
   }
   deleteTask(task) {
-    this.apiService.removeTask(task);
+    
+    this.taskToDelete = task;
   }
 
+  handleDeleteTask(task){
+    this.apiService.removeTask(task).then(()=>{
+      this.taskToDelete = {};
+    });
+  }
   handleAddUpdate($event) {
     if ($event.hasOwnProperty('$key')) {
       this.apiService.updateTask($event).then(()=> {
@@ -55,7 +62,7 @@ export class TasksComponent implements OnInit {
     
   }
   nextTaskId() {
-    return this.tasks.length > 0 ? this.tasks[this.tasks.length - 1].id + 1 : 1;
+    return this.tasks.length > 0 ? this.tasks[this.tasks.length - 1].id + 1 : 1000;
   }
 
 }

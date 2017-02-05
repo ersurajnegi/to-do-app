@@ -21,3 +21,9 @@ body{
     height: 150px;
     background-color: #DDD;
 }
+.modal-header
+{
+    background-color: #e5e5e5;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}

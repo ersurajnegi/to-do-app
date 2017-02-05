@@ -6,7 +6,10 @@
 <div class="container">
   <div class="row">
     <div class="col-md-offset-1 col-md-10">
-      <div class="table-responsive">
+      <div class="alert alert-danger" *ngIf="tasks.length == 0">
+        You haven't added any task yet. Please Add some task.
+      </div>
+      <div class="table-responsive" *ngIf="tasks.length != 0">
         <table class="table table-striped">
           <thead>
             <tr>
@@ -37,3 +40,4 @@
 
 <app-add-edit [task]="currentTask" (addUpdate)="handleAddUpdate($event)"></app-add-edit>
 <app-loader *ngIf="showLoader"></app-loader>
+<app-delete [taskToDelete]="taskToDelete" (taskToDeleteChange)="handleDeleteTask($event)" ></app-delete>

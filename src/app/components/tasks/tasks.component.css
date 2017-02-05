@@ -31,3 +31,7 @@ h4 button{
     transform: rotate(360deg);
   }
 }
+
+.alert{
+    text-align: center;
+}

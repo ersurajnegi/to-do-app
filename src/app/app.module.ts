@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { AddEditComponent } from './components/add-edit/add-edit.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { DeleteComponent } from './components/delete/delete.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyB5R-7qXKQ6Iy-7CxWf6TVQzxMzX3_j9ss",
@@ -29,6 +30,7 @@ const firebaseConfig = {
     TasksComponent,
     AddEditComponent,
     LoaderComponent,
+    DeleteComponent,
   ],
   imports: [
     BrowserModule,

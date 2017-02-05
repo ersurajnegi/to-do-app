@@ -3,7 +3,7 @@ import { AngularFire, FirebaseListObservable } from "angularfire2";
 import 'rxjs/Rx';
 import { Observable } from 'rxjs/Rx';
 
-import { ITask,  } from './models/task';
+import { ITask, } from './models/task';
 
 @Injectable()
 export class ApiService {
@@ -15,12 +15,13 @@ export class ApiService {
     return this.tasks;
   }
 
-  createTask(task){
+  createTask(task) {
     return this.tasks.push(task);
   }
 
-  updateTask(task){
-    return this.tasks.update(task.$key, task);
+  updateTask(task) {
+    let test = { id: task.id, title: task.title, status: task.status };
+    return this.tasks.update(task.$key, test);
   }
 
   removeTask(task) {
