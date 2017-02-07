@@ -7,28 +7,22 @@ declare var $;
 })
 export class DeleteComponent implements OnInit {
   @Input() taskToDelete;
-  @Output() taskToDeleteChange = new EventEmitter();
-  modalHeader:string ="";
-  constructor() { }
-
+  @Output() handleDelete = new EventEmitter();
+  @Output() modalClose = new EventEmitter();
+  modalHeader:string ="Delete Task";
+  
   ngOnInit() {
+    this.openModal();
   }
   confirmDelete(){
-      this.taskToDeleteChange.emit(this.taskToDelete);
-  }
-  ngOnChanges(changes) {
-    if (changes.taskToDelete.currentValue.status) {
-      this.modalHeader = "Delete Task";
-      this.openModal();
-    }
-    else{
+      this.handleDelete.emit(this.taskToDelete);
       this.closeModal();
-    }
   }
   openModal() {
     $('#deleteModal').modal({ backdrop: 'static' });
   }
   closeModal(){
     $('#deleteModal').modal('hide');
+    this.modalClose.emit();
   }
 }

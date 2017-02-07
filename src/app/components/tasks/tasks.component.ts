@@ -9,8 +9,8 @@ import { ITask } from '../../models/task';
 })
 export class TasksComponent implements OnInit {
   tasks = Array<ITask>();
-  currentTask = {};
-  taskToDelete = {};
+  currentTask = null;
+  taskToDelete = null;
   showLoader: boolean = true;
   constructor(private apiService: ApiService) {
 
@@ -31,38 +31,48 @@ export class TasksComponent implements OnInit {
     this.currentTask = { id: this.nextTaskId(), title: "", status: "Pending" };
   }
 
-  editTask(task: ITask) {
+  editTask(task) {
     this.currentTask = task;
   }
+
+  handleAddUpdate($event) {
+    if ($event.hasOwnProperty('$key')) {
+      this.apiService.updateTask($event).then(() => {
+        this.showLoader = false;
+        this.currentTask = null;
+      }, (error) => {
+        this.currentTask = null;
+      })
+    }
+    else {
+      this.apiService.createTask($event).then(() => {
+        this.currentTask = null;
+      }, (error) => {
+        this.currentTask = null;
+      })
+
+    }
+
+  }
+  handleAddModalClose() {
+    this.currentTask = null;
+  }
+
+  nextTaskId() {
+    return this.tasks.length > 0 ? this.tasks[this.tasks.length - 1].id + 1 : 1000;
+  }
+
   deleteTask(task) {
-    
     this.taskToDelete = task;
   }
 
-  handleDeleteTask(task){
-    this.apiService.removeTask(task).then(()=>{
-      this.taskToDelete = {};
+  handleDeleteTask(task) {
+    this.apiService.removeTask(task).then(() => {
+      this.taskToDelete = null;
     });
   }
-  handleAddUpdate($event) {
-    if ($event.hasOwnProperty('$key')) {
-      this.apiService.updateTask($event).then(()=> {
-        this.showLoader = false;
-        this.currentTask = {};
-    },(error)=> {
-      alert("Some Error Occured");
-    })
-    }
-    else{
-      this.apiService.createTask($event).then(() => {
-        this.currentTask = {};
-      })
-      
-    }
-    
-  }
-  nextTaskId() {
-    return this.tasks.length > 0 ? this.tasks[this.tasks.length - 1].id + 1 : 1000;
+  handleDeleteModalClose() {
+    this.taskToDelete = null;
   }
 
 }

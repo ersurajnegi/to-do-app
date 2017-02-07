@@ -1,6 +1,6 @@
 <div class="page-header">
   <h4>To Do Tasks List
-    <button class="btn btn-danger"(click)="addTask()">Add Task</button>
+    <button class="btn btn-danger" (click)="addTask()">Add Task</button>
   </h4>
 </div>
 <div class="container">
@@ -38,6 +38,7 @@
   </div>
 </div>
 
-<app-add-edit [task]="currentTask" (addUpdate)="handleAddUpdate($event)"></app-add-edit>
+<app-add-edit *ngIf="currentTask" [task]="currentTask" (addModalClose)="handleAddModalClose()" (addUpdate)="handleAddUpdate($event)"></app-add-edit>
 <app-loader *ngIf="showLoader"></app-loader>
-<app-delete [taskToDelete]="taskToDelete" (taskToDeleteChange)="handleDeleteTask($event)" ></app-delete>
+<app-delete *ngIf="taskToDelete" [taskToDelete]="taskToDelete" (modalClose)="handleDeleteModalClose()" (handleDelete)="handleDeleteTask($event)">
+</app-delete>
