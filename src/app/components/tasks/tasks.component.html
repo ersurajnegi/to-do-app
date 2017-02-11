@@ -39,6 +39,6 @@
 </div>
 
 <app-add-edit *ngIf="currentTask" [task]="currentTask" (addModalClose)="handleAddModalClose()" (addUpdate)="handleAddUpdate($event)"></app-add-edit>
-<app-loader *ngIf="showLoader"></app-loader>
+
 <app-delete *ngIf="taskToDelete" [taskToDelete]="taskToDelete" (modalClose)="handleDeleteModalClose()" (handleDelete)="handleDeleteTask($event)">
 </app-delete>

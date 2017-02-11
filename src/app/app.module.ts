@@ -1,3 +1,5 @@
+import { LoadingService } from './services/loading.service';
+import { LoginService } from './services/login.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -14,6 +16,8 @@ import { TasksComponent } from './components/tasks/tasks.component';
 import { AddEditComponent } from './components/add-edit/add-edit.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { DeleteComponent } from './components/delete/delete.component';
+import { LoginComponent } from './components/login/login.component';
+import { routes } from './app.routes';
 
 const firebaseConfig = {
   apiKey: "AIzaSyB5R-7qXKQ6Iy-7CxWf6TVQzxMzX3_j9ss",
@@ -31,14 +35,16 @@ const firebaseConfig = {
     AddEditComponent,
     LoaderComponent,
     DeleteComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig,{method: AuthMethods.Popup}),
+    routes
   ],
-  providers: [ApiService],
+  providers: [ApiService,LoginService,LoadingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

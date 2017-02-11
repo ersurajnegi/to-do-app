@@ -1,3 +1,4 @@
+import { LoadingService } from './../../services/loading.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { ITask } from '../../models/task';
@@ -11,19 +12,23 @@ export class TasksComponent implements OnInit {
   tasks = Array<ITask>();
   currentTask = null;
   taskToDelete = null;
-  showLoader: boolean = true;
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private _loading: LoadingService) {
 
   }
 
   ngOnInit() {
     this.getTasks();
   }
+  
   getTasks() {
+    this._loading.showLoader();
     this.apiService.getData()
       .subscribe(data => {
         this.tasks = data;
-        this.showLoader = false;
+        this._loading.hideLoader();
+      },
+      (error) => {
+        this._loading.hideLoader();
       })
   }
 
@@ -38,7 +43,7 @@ export class TasksComponent implements OnInit {
   handleAddUpdate($event) {
     if ($event.hasOwnProperty('$key')) {
       this.apiService.updateTask($event).then(() => {
-        this.showLoader = false;
+        
         this.currentTask = null;
       }, (error) => {
         this.currentTask = null;
