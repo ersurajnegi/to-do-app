@@ -100,6 +100,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Service References\Application Insights\ConnectedService.json" />
+    <Content Include="448c34a56d699c29117adc64c43affeb.woff2" />
+    <Content Include="e18bbf611f2a2e43afc071aa2f4e1512.ttf" />
+    <Content Include="f4769f9bdb7466be65088239c12046d1.eot" />
+    <Content Include="fa2772327f55d8198301fdb8bcfc8158.woff" />
+    <Content Include="inline.221bc1bf910d130a43e0.bundle.map" />
+    <Content Include="main.716e03a0cf12873e587f.bundle.js.gz" />
+    <Content Include="main.716e03a0cf12873e587f.bundle.map" />
+    <Content Include="scripts.40b0a483386a0273c63b.bundle.js.gz" />
+    <Content Include="scripts.40b0a483386a0273c63b.bundle.map" />
+    <Content Include="styles.020b8feeba81e05dd160.bundle.css.gz" />
+    <Content Include="styles.020b8feeba81e05dd160.bundle.js.gz" />
+    <Content Include="styles.020b8feeba81e05dd160.bundle.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -108,6 +120,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="404.html" />
+    <Content Include="89889688147bd7575d6327160d64e760.svg" />
+    <Content Include="balls.gif" />
+    <Content Include="c1a23d7caff30c1e3c57c511a5f795be.gif" />
+    <Content Include="favicon.ico" />
+    <Content Include="index.html" />
+    <Content Include="inline.221bc1bf910d130a43e0.bundle.js" />
+    <Content Include="main.716e03a0cf12873e587f.bundle.js" />
+    <Content Include="scripts.40b0a483386a0273c63b.bundle.js" />
+    <Content Include="styles.020b8feeba81e05dd160.bundle.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
