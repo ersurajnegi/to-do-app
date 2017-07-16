@@ -1,27 +1,18 @@
 <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" >
+      <a class="navbar-brand" href="#">
         To Do App
       </a>
-      <!-- <div class="pull-right" *ngIf="userDetails">
-      
-      <img class="profile-img" src="{{userDetails.photoURL}}">
-      <li class="dropdown">
-        <a class="dropdown-toggle welcome" data-toggle="dropdown" href="#">{{userDetails.displayName}}
-        <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a (click)="logout()">Logout</a></li>
-        </ul>
-      </li>
-    </div> -->
     </div>
-    
+
   </div>
 </nav>
 <div class=" loader-container">
-  <!--<app-tasks ></app-tasks>-->
+  <div class="container">
+    <router-outlet></router-outlet>
+    <!-- <app-loader></app-loader> -->
+  </div>
   <!-- Router Outlet -->
-  <router-outlet></router-outlet>
-  <!-- <app-loader></app-loader> -->
+
 </div>

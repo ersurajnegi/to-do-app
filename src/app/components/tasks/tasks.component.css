@@ -1,78 +1,80 @@
-h4{
+h5
+{
     text-align: center;
+    color: #26a69a;
+    padding: 10px;
 }
-h4 button{
-    float: right;
-    margin-right: 40px; 
+.btn-floating
+{
+    opacity: 0;
+}
+.page-header .btn-floating.halfway-fab.add
+{
+     top: 0;
+     right: 0;
+     opacity: 1;
 }
 
-
-.alert{
-    text-align: center;
-}
-li
-{
-    margin: 5px;
-    border-radius: 4px;
-}
-li:hover
-{
-    background-color: #fafafa;
-}
-li.Done
+.Done
 {
     border-left: 5px solid green;
 }
-li.Pending
+.Pending
 {
     border-left: 5px solid orange;
 }
-li.new
+.new
 {
     border-left: 5px solid red;
 }
-.id
-{
-    width: 20px;
-    display:inline-block;
-}
-.description
-{
-    width:80%;
-    display:inline-block;
-}
+
 .actions
 {
     float:right;
 }
-.edit-action
-{
-    margin: 0 1px;
-    color: orange;
-    opacity: .5;
-    font-size: 0.8em;
-}
 
-.delete-action
+.divider
 {
-    margin: 0 1px;
-    color: red;
-    opacity: .5;
-    font-size: 0.8em;
+    margin-bottom: 30px;
 }
-
-.edit-action:hover,.delete-action:hover
+.card
+{
+    margin: 0 0 2rem 0;
+}
+.card .card-content
+{
+    padding:15px 10px;
+}
+.card .card-content .card-title
+{
+    line-height: 1.5;
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+.card .card-content .btn-floating.halfway-fab.edit
+{
+     right: 45px;  
+     top: -20px;
+}
+.card .card-content .btn-floating.halfway-fab.delete
+{
+    right: 0;
+    top: -20px;
+}
+.card:hover .btn-floating
 {
     opacity: 1;
-    -webkit-animation: roll 1s;
-    animation: roll 1s;
+    -webkit-transition: all 1ms linear ease-in;
+    -moz-transition: all 1ms linear ease-in;
+    transition: all 1ms linear ease-in;
 }
 
-@keyframes roll {
-  0% {
-    transform: rotate(0);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+.page-header
+{
+    position: relative;
+}
+/*Modal  */
+.modal-content
+{
+    padding-top:0;
 }

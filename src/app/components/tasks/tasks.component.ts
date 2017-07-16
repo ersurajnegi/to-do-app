@@ -5,6 +5,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { ITask } from '../../models/task';
 
+declare var $: any;
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
@@ -23,18 +24,18 @@ export class TasksComponent {
   }
 
   ngOnInit() {
-    this.getUserDetails()
+    this.getUserDetails();
   }
 
   getUserDetails() {
     this._login._userDetails.subscribe((data) => {
       this.userDetails.id = data.uid;
-       this.getTasks();
+      this.getTasks();
     })
   }
   getTasks() {
     this._loading.showLoader();
-    this._apiService.getData({id : this.userDetails.id})
+    this._apiService.getData({ id: this.userDetails.id })
       .subscribe(data => {
         this.tasks = data;
         this._loading.hideLoader();
@@ -46,15 +47,24 @@ export class TasksComponent {
 
   addTask() {
     this.currentTask = { id: this.nextTaskId(), title: "", status: "Pending" };
+    setTimeout(() =>{
+      $('select').material_select();
+      $('#addEditModal').modal('open');
+    });
+    
   }
 
   editTask(task) {
     this.currentTask = task;
+     setTimeout(() =>{
+      $('select').material_select();
+      $('#addEditModal').modal('open');
+    });
   }
 
   handleAddUpdate($event) {
     if ($event.hasOwnProperty('$key')) {
-      this._apiService.updateTask({task : $event,id : this.userDetails.id}).then(() => {
+      this._apiService.updateTask({ task: $event, id: this.userDetails.id }).then(() => {
 
         this.currentTask = null;
       }, (error) => {
@@ -62,7 +72,7 @@ export class TasksComponent {
       })
     }
     else {
-      this._apiService.createTask({task : $event,id : this.userDetails.id}).then(() => {
+      this._apiService.createTask({ task: $event, id: this.userDetails.id }).then(() => {
         this.currentTask = null;
       }, (error) => {
         this.currentTask = null;
@@ -71,8 +81,9 @@ export class TasksComponent {
     }
 
   }
-  handleAddModalClose() {
+  handleAddModalClose(id) {
     this.currentTask = null;
+    $('#'+ id).modal('close');
   }
 
   nextTaskId() {
