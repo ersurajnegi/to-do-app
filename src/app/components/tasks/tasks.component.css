@@ -35,3 +35,69 @@ h4 button{
 .alert{
     text-align: center;
 }
+li
+{
+    margin: 5px;
+    border-radius: 4px;
+}
+li:hover
+{
+    background-color: #fafafa;
+}
+li.Done
+{
+    border-left: 5px solid green;
+}
+li.Pending
+{
+    border-left: 5px solid orange;
+}
+li.new
+{
+    border-left: 5px solid red;
+}
+.id
+{
+    width: 20px;
+    display:inline-block;
+}
+.description
+{
+    width:80%;
+    display:inline-block;
+}
+.actions
+{
+    float:right;
+}
+.edit-action
+{
+    margin: 0 5px;
+    color: orange;
+    opacity: .5;
+    font-size: 1.2em;
+}
+
+.delete-action
+{
+    margin: 0 5px;
+    color: red;
+    opacity: .5;
+    font-size: 1.2em;
+}
+
+.edit-action:hover,.delete-action:hover
+{
+    opacity: 1;
+    -webkit-animation: roll 1s;
+    animation: roll 1s;
+}
+
+@keyframes roll {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

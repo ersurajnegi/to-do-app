@@ -1,16 +1,14 @@
-import { LoadingService } from './services/loading.service';
-import { LoginService } from './services/login.service';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { 
-  AngularFireModule, 
-  AuthMethods, 
-  AuthProviders 
-} from "angularfire2";
+
+import { AngularFireModule} from "angularfire2";
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import {ApiService} from './api.service';
+import { LoadingService } from './services/loading.service';
+import { LoginService } from './services/login.service';
 import { AppComponent } from './app.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { AddEditComponent } from './components/add-edit/add-edit.component';
@@ -27,7 +25,6 @@ const firebaseConfig = {
     messagingSenderId: "1046096271852"
 };
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,16 +32,17 @@ const firebaseConfig = {
     AddEditComponent,
     LoaderComponent,
     DeleteComponent,
-    LoginComponent
+     LoginComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    HttpModule,
-    AngularFireModule.initializeApp(firebaseConfig,{method: AuthMethods.Popup}),
-    routes
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    routes,
+    FormsModule
   ],
-  providers: [ApiService,LoginService,LoadingService],
+  providers: [ApiService, LoginService, LoadingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

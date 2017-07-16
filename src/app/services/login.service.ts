@@ -2,39 +2,51 @@ import { LoadingService } from './loading.service';
 import { Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { AngularFire, AuthProviders, FirebaseListObservable } from 'angularfire2';
-
+import { AngularFireDatabase } from 'angularfire2/database';
+import * as firebase from 'firebase/app';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Injectable()
 export class LoginService {
-  private _userDetails: any;
-  private _users: any;
-  constructor(private _af: AngularFire, private _router: Router, private _loading:LoadingService) {
-
-    this._af.auth.subscribe(user => {
-      if (user) {
-        // user logged in
-        this.setUserDetails(user);
+  _userDetails: Observable<firebase.User>;
+  constructor(
+    private _ngAuth: AngularFireAuth,
+    private _ngDatabase: AngularFireDatabase,
+    private _router: Router,
+    private _loading: LoadingService
+  ) {
+    this._userDetails = this._ngAuth.authState;
+    this._userDetails.subscribe((data) => {
+      if (data) {
+        //this.setUserDetails(data);
+        this.saveUser(data);
       }
       else {
         this.routeToLogin();
       }
-
     });
   }
+  login(): any {
+    this._loading.showLoader();
+    this._ngAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+      .then(() => {
+        return false;
+      }, (error) => {
+        console.log("my error : " + error);
+        this.routeToLogin();
+      });
 
-  setUserDetails(user) {
-    this._userDetails = { id: user.auth.uid, name: user.auth.displayName };
-    localStorage.setItem('userDetails', JSON.stringify(this._userDetails));
-    this._users = this._af.database.list('users', {
-      query: {
-        orderByChild: 'id',
-        equalTo: user.auth.uid,
-      }
+  }
+  logout() {
+    this._ngAuth.auth.signOut().then(() => { localStorage.setItem('userDetails', null); });
+  }
+  saveUser(user) {
+    let _users = this._ngDatabase.list('users', {
+      query: { orderByChild: 'id', equalTo: user.uid, }
     });
-    this._users.subscribe((data) => {
-      if (data.length == 0) {
-        this._users.push(this._userDetails);
+    _users.subscribe((data) => {
+      if (!data.length) {
+        _users.push({ id: user.uid, name: user.displayName });
       }
       this.routeToTask();
     }, (error) => {
@@ -42,24 +54,12 @@ export class LoginService {
     })
 
   }
-  getUserDetails() {
-    return this._userDetails || JSON.parse(localStorage.getItem('userDetails'));
-  }
   routeToLogin() {
     this._router.navigate(['/login']);
   }
   routeToTask() {
     this._router.navigate(['/tasks']);
   }
-  login(): any {
-    this._loading.showLoader();
-    this._af.auth.login({
-      provider: AuthProviders.Google
-    });
 
-  }
-  logout() {
-    this._af.auth.logout().then(() => { localStorage.setItem('userDetails', null); });
-  }
-  
+
 }

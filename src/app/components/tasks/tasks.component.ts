@@ -1,4 +1,6 @@
+import { LoginService } from './../../services/login.service';
 import { LoadingService } from './../../services/loading.service';
+
 import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { ITask } from '../../models/task';
@@ -8,21 +10,31 @@ import { ITask } from '../../models/task';
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.css']
 })
-export class TasksComponent implements OnInit {
+export class TasksComponent {
   tasks = Array<ITask>();
+  userDetails: any = new Object();
   currentTask = null;
   taskToDelete = null;
-  constructor(private apiService: ApiService, private _loading: LoadingService) {
+  constructor(
+    private _apiService: ApiService,
+    private _loading: LoadingService,
+    private _login: LoginService) {
 
   }
 
   ngOnInit() {
-    this.getTasks();
+    this.getUserDetails()
   }
-  
+
+  getUserDetails() {
+    this._login._userDetails.subscribe((data) => {
+      this.userDetails.id = data.uid;
+       this.getTasks();
+    })
+  }
   getTasks() {
     this._loading.showLoader();
-    this.apiService.getData()
+    this._apiService.getData({id : this.userDetails.id})
       .subscribe(data => {
         this.tasks = data;
         this._loading.hideLoader();
@@ -42,15 +54,15 @@ export class TasksComponent implements OnInit {
 
   handleAddUpdate($event) {
     if ($event.hasOwnProperty('$key')) {
-      this.apiService.updateTask($event).then(() => {
-        
+      this._apiService.updateTask({task : $event,id : this.userDetails.id}).then(() => {
+
         this.currentTask = null;
       }, (error) => {
         this.currentTask = null;
       })
     }
     else {
-      this.apiService.createTask($event).then(() => {
+      this._apiService.createTask({task : $event,id : this.userDetails.id}).then(() => {
         this.currentTask = null;
       }, (error) => {
         this.currentTask = null;
@@ -72,7 +84,7 @@ export class TasksComponent implements OnInit {
   }
 
   handleDeleteTask(task) {
-    this.apiService.removeTask(task).then(() => {
+    this._apiService.removeTask(task).then(() => {
       this.taskToDelete = null;
     });
   }

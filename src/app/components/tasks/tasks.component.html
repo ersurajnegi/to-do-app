@@ -3,37 +3,29 @@
     <button class="btn btn-danger" (click)="addTask()">Add Task</button>
   </h4>
 </div>
+
+
 <div class="container">
   <div class="row">
     <div class="col-md-offset-1 col-md-10">
       <div class="alert alert-danger" *ngIf="tasks.length == 0">
         You haven't added any task yet. Please Add some task.
       </div>
-      <div class="table-responsive" *ngIf="tasks.length != 0">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Id</th>
-              <th>Title</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let task of tasks;let i= index;">
-              <td>{{i}}</td>
-              <td>{{task.id}}</td>
-              <td>{{task.title}}</td>
-              <td>{{task.status}}</td>
-              <td>
-                <span class="glyphicon glyphicon-pencil edit-action" (click)="editTask(task)"></span>
-                <span class="glyphicon glyphicon-trash delete-action" (click)="deleteTask(task)"></span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <ul class="list-group" *ngIf="tasks.length != 0">
+          <li class="list-group-item" [ngClass]="task.status" *ngFor="let task of tasks;let i= index;">
+            <div class="id">
+              i.
+            </div>
+            <div class="description">
+              {{task.status}}
+            </div>
+            <div class="actions">
+              <span class="glyphicon glyphicon-pencil edit-action" (click)="editTask(task)"></span>
+              <span class="glyphicon glyphicon-trash delete-action" (click)="deleteTask(task)"></span>
+            </div>
+          </li>
+        </ul>
+
     </div>
   </div>
 </div>
