@@ -14,7 +14,7 @@
         <ul class="list-group" *ngIf="tasks.length != 0">
           <li class="list-group-item" [ngClass]="task.status" *ngFor="let task of tasks;let i= index;">
             <div class="id">
-              i.
+              {{i}}.
             </div>
             <div class="description">
               {{task.status}}

@@ -1,5 +1,4 @@
 import { LoginService } from './services/login.service';
-// import { AngularFire } from 'angularfire2';
 import { Component } from '@angular/core';
 
 @Component({
