@@ -5,32 +5,7 @@ h4 button{
     float: right;
     margin-right: 40px; 
 }
-.edit-action{
-    margin: 0 1px;
-    color: orange;
-    opacity: .5;
-    font-size: 0.8em;
-}
 
-.delete-action{
-    margin: 0 1px;
-    color: red;
-    opacity: .5;
-    font-size: 0.8em;
-}
-
-.edit-action:hover, .delete-action:hover{
-    opacity: 1;
-    animation: roll 1s;
-}
-@keyframes roll {
-  0% {
-    transform: rotate(0);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
 
 .alert{
     text-align: center;
@@ -72,18 +47,18 @@ li.new
 }
 .edit-action
 {
-    margin: 0 5px;
+    margin: 0 1px;
     color: orange;
     opacity: .5;
-    font-size: 1.2em;
+    font-size: 0.8em;
 }
 
 .delete-action
 {
-    margin: 0 5px;
+    margin: 0 1px;
     color: red;
     opacity: .5;
-    font-size: 1.2em;
+    font-size: 0.8em;
 }
 
 .edit-action:hover,.delete-action:hover
