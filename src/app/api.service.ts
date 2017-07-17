@@ -10,7 +10,7 @@ export class ApiService {
   private currentUser: any;
   constructor(private _ngDatabase: AngularFireDatabase) { }
   getData({ id }) {
-    this._tasks =  this._ngDatabase.list('tasks', {
+    this._tasks = this._ngDatabase.list('tasks', {
       query: {
         orderByChild: 'createdBy',
         equalTo: id
@@ -19,15 +19,15 @@ export class ApiService {
     return this._tasks;
   }
 
-  createTask({task, id}) {
-    task.createdBy = id;
+  createTask({ task }) {
     return this._tasks.push(task);
+
   }
 
-  updateTask({task, id}) {
-    // let test = { id: task.id, title: task.title, status: task.status };
-    
-    return this._tasks.update(task.$key, task);
+  updateTask({ task }) {
+    const $key = task.$key;
+    delete task.$key;
+    return this._tasks.update($key, task);
   }
 
   removeTask(task) {

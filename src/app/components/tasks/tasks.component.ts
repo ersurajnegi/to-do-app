@@ -1,11 +1,9 @@
 import { LoginService } from './../../services/login.service';
-import { LoadingService } from './../../services/loading.service';
 
 import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { ITask } from '../../models/task';
 
-declare var $: any;
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
@@ -16,9 +14,10 @@ export class TasksComponent {
   userDetails: any = new Object();
   currentTask = null;
   taskToDelete = null;
+  isLoading: boolean = false;
+  $key: null;
   constructor(
     private _apiService: ApiService,
-    private _loading: LoadingService,
     private _login: LoginService) {
 
   }
@@ -28,70 +27,56 @@ export class TasksComponent {
   }
 
   getUserDetails() {
+    this.isLoading = true;
     this._login._userDetails.subscribe((data) => {
-      this.userDetails.id = data.uid;
-      this.getTasks();
+      if (data) {
+        this.userDetails.id = data.uid;
+        this.getTasks();
+        return;
+      }
+      this.userDetails = null;
     })
   }
   getTasks() {
-    this._loading.showLoader();
     this._apiService.getData({ id: this.userDetails.id })
       .subscribe(data => {
         this.tasks = data;
-        this._loading.hideLoader();
+        this.isLoading = false;
       },
       (error) => {
-        this._loading.hideLoader();
       })
   }
 
   addTask() {
-    this.currentTask = { id: this.nextTaskId(), title: "", status: "Pending" };
-    setTimeout(() =>{
-      $('select').material_select();
-      $('#addEditModal').modal('open');
-    });
-    
+    this.currentTask = { title: "", status: "" };
   }
-
   editTask(task) {
     this.currentTask = task;
-     setTimeout(() =>{
-      $('select').material_select();
-      $('#addEditModal').modal('open');
+    this.$key = task.$key;
+  }
+
+  saveTask($event) {
+    if ($event.createdBy) {
+      this.updateTask($event);
+      return;
+    }
+    this.createTask($event);
+  }
+  createTask($event) {
+    $event.createdBy = this.userDetails.id;
+    this._apiService.createTask({ task: $event }).then(_ => {
+      this.currentTask = null;
     });
   }
-
-  handleAddUpdate($event) {
-    if ($event.hasOwnProperty('$key')) {
-      this._apiService.updateTask({ task: $event, id: this.userDetails.id }).then(() => {
-
-        this.currentTask = null;
-      }, (error) => {
-        this.currentTask = null;
-      })
-    }
-    else {
-      this._apiService.createTask({ task: $event, id: this.userDetails.id }).then(() => {
-        this.currentTask = null;
-      }, (error) => {
-        this.currentTask = null;
-      })
-
-    }
+  updateTask($event) {
+    $event.$key = this.$key;
+    this._apiService.updateTask({ task: $event }).then(_ => {
+      this.currentTask = null;
+    });
 
   }
-  handleAddModalClose(id) {
+  modalClose() {
     this.currentTask = null;
-    $('#'+ id).modal('close');
-  }
-
-  nextTaskId() {
-    return this.tasks.length > 0 ? this.tasks[this.tasks.length - 1].id + 1 : 1000;
-  }
-
-  deleteTask(task) {
-    this.taskToDelete = task;
   }
 
   handleDeleteTask(task) {
@@ -99,8 +84,4 @@ export class TasksComponent {
       this.taskToDelete = null;
     });
   }
-  handleDeleteModalClose() {
-    this.taskToDelete = null;
-  }
-
 }

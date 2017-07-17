@@ -6,45 +6,25 @@
 </div>
 
 <div class="divider"></div>
+<mz-spinner *ngIf="isLoading; else taskDiv" [color]="'teal'" [size]="'big'">
+</mz-spinner>
 
-<div class="row" *ngIf="tasks.length != 0">
-  <div class="col s12" *ngFor="let task of tasks;let i= index;">
-    <div class="card" [ngClass]="task.status">
-      <div class="card-content">
-        <span class="card-title">{{task.title}}</span>
-        <a class="btn-floating halfway-fab waves-effect waves-light teal edit">
+<ng-template #taskDiv>
+  <div class="row" *ngIf="tasks.length != 0">
+    <div class="col s12" *ngFor="let task of tasks;let i= index;">
+      <div class="card" [ngClass]="task.status">
+        <div class="card-content">
+          <span class="card-title">{{task.title}}</span>
+          <a class="btn-floating halfway-fab waves-effect waves-light teal edit">
             <i class="material-icons" (click)="editTask(task)">edit</i>
           </a>
-        <a class="btn-floating halfway-fab waves-effect waves-light red delete" (click)="handleDeleteTask(task)">
+          <a class="btn-floating halfway-fab waves-effect waves-light red delete" (click)="handleDeleteTask(task)">
             <i class="material-icons">delete</i>
           </a>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</ng-template>
 
-
-<div id="addEditModal" class="modal" *ngIf="currentTask">
-  <div class="modal-content">
-    <h5>Add/Edit Task</h5>
-    <div class="row">
-      <form class="col s12" name="form">
-        <div class="input-field">
-          <input id="title" type="text" name="title" class="validate" [(ngModel)]="currentTask.title">
-          <label for="title">Title</label>
-        </div>
-        <div class="input-field">
-          <select name="status" ([ngModel])="currentTask.status">
-            <option>Pending</option>
-            <option>Done</option>
-          </select>
-          <label>Status</label>
-        </div>
-      </form>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <a class="modal-action modal-close waves-effect waves-light btn" (click)="handleAddUpdate(currentTask)">Save</a>
-    <a class="modal-action modal-close waves-effect waves-light btn" (click)="handleAddModalClose('addEditModal')">Cancel</a>
-  </div>
-</div>
+<app-add-edit [task]="currentTask" *ngIf="currentTask" (saveEvent)="saveTask($event)" (modalClose)="modalClose()"></app-add-edit>

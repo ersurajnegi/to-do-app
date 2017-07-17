@@ -1,13 +1,13 @@
 <nav class="navbar navbar-default">
-  <div class="container">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">
-        To Do App
-      </a>
-    </div>
-
+  <div class="nav-wrapper">
+    <a href="#!" class="navbar-brand">To Do App</a>
+    <ul class="right" *ngIf="userDetails">
+      <!-- <li><a> Welcome, {{userDetails.displayName}} </a></li> -->
+      <li><a (click)="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i> Log out</a></li>
+    </ul>
   </div>
 </nav>
+
 <div class=" loader-container">
   <div class="container">
     <router-outlet></router-outlet>

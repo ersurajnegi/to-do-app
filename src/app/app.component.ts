@@ -1,5 +1,5 @@
 import { LoginService } from './services/login.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +8,19 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title: string = 'To Do App';
-  constructor(private _login: LoginService) {  }
+  constructor(private _login: LoginService) { }
+  userDetails: any = null;
+  navbarClass: string = "my-navbar";
+  ngOnInit() {
+    this._login._userDetails.subscribe((data) => {
+      if (data) {
+        this.userDetails = data;
+        return;
+      }
+      this.userDetails = null;
+    });
+  }
   logout() {
-    //this._login.logout();
     this._login.logout();
 
   }

@@ -1,4 +1,3 @@
-import { LoadingService } from './loading.service';
 import { Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
@@ -12,8 +11,7 @@ export class LoginService {
   constructor(
     private _ngAuth: AngularFireAuth,
     private _ngDatabase: AngularFireDatabase,
-    private _router: Router,
-    private _loading: LoadingService
+    private _router: Router
   ) {
     this._userDetails = this._ngAuth.authState;
     this._userDetails.subscribe((data) => {
@@ -27,7 +25,7 @@ export class LoginService {
     });
   }
   login(): any {
-    this._loading.showLoader();
+  
     this._ngAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
       .then(() => {
         return false;
