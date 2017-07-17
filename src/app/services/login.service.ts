@@ -14,26 +14,12 @@ export class LoginService {
     private _router: Router
   ) {
     this._userDetails = this._ngAuth.authState;
-    // this._userDetails.subscribe((data) => {
-    //   if (data) {
-    //     //this.setUserDetails(data);
-    //     this.saveUser(data);
-    //   }
-    //   else {
-    //     this.routeToLogin();
-    //   }
-    // });
   }
-  login(): any {
-  
-    this._ngAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-      .then(() => {
-        return false;
-      }, (error) => {
-        console.log("my error : " + error);
-        this.routeToLogin();
-      });
-
+  login(resource): any {
+    if (resource == "google")
+      this._ngAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    else
+      this._ngAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
   }
   logout() {
     this._ngAuth.auth.signOut();
@@ -46,9 +32,7 @@ export class LoginService {
       if (!data.length) {
         _users.push({ id: user.uid, name: user.displayName });
       }
-      //this.routeToTask();
     }, (error) => {
-      //this.routeToLogin();
     });
 
   }
