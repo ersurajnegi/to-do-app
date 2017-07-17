@@ -1,6 +1,6 @@
 <div class="page-header">
   <h5>To Do Tasks List </h5>
-  <a class="btn-floating halfway-fab waves-effect waves-light teal add" (click)="addTask()">
+  <a class="btn-floating halfway-fab waves-effect waves-light teal pulse add" (click)="addTask()">
       <i class="material-icons">add</i>
   </a>
 </div>
@@ -10,7 +10,7 @@
 </mz-spinner>
 
 <ng-template #taskDiv>
-  <div class="row" *ngIf="tasks.length != 0">
+  <div class="row" *ngIf="tasks.length != 0;else noTasks">
     <div class="col s12" *ngFor="let task of tasks;let i= index;">
       <div class="card" [ngClass]="task.status">
         <div class="card-content">
@@ -25,6 +25,15 @@
       </div>
     </div>
   </div>
+<ng-template #noTasks>
+  <div class="col s12">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">No Tasks Available. Please add your Tasks. </span>
+        </div>
+      </div>
+    </div>
+  </ng-template>
 </ng-template>
 
 <app-add-edit [task]="currentTask" *ngIf="currentTask" (saveEvent)="saveTask($event)" (modalClose)="modalClose()"></app-add-edit>
