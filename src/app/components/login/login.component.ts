@@ -7,13 +7,19 @@ import { LoginService } from '../../services/login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  constructor(private  login: LoginService) {
-  }
+  showLoader: boolean = true;
+  constructor(private  _login: LoginService) {  }
 
   ngOnInit() {
+    this._login._userDetails.subscribe((data) => {
+      this.showLoader = false;      
+      if(data){
+        this._login.routeToTask();
+        this._login.saveUser(data);
+      }
+    });
   }
   viaGoogle(){
-    this.login.login();
+    this._login.login();
   }
 }

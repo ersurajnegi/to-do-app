@@ -6,8 +6,7 @@
 </div>
 
 <div class="divider"></div>
-<mz-spinner *ngIf="isLoading; else taskDiv" [color]="'teal'" [size]="'big'">
-</mz-spinner>
+<app-loader *ngIf="isLoading; else taskDiv"></app-loader>
 
 <ng-template #taskDiv>
   <div class="row" *ngIf="tasks.length != 0;else noTasks">

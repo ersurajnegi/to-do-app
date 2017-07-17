@@ -35,6 +35,7 @@ export class TasksComponent {
         return;
       }
       this.userDetails = new Object();
+      this._login.routeToLogin();
     })
   }
   getTasks() {

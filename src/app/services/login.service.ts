@@ -14,15 +14,15 @@ export class LoginService {
     private _router: Router
   ) {
     this._userDetails = this._ngAuth.authState;
-    this._userDetails.subscribe((data) => {
-      if (data) {
-        //this.setUserDetails(data);
-        this.saveUser(data);
-      }
-      else {
-        this.routeToLogin();
-      }
-    });
+    // this._userDetails.subscribe((data) => {
+    //   if (data) {
+    //     //this.setUserDetails(data);
+    //     this.saveUser(data);
+    //   }
+    //   else {
+    //     this.routeToLogin();
+    //   }
+    // });
   }
   login(): any {
   
@@ -36,7 +36,7 @@ export class LoginService {
 
   }
   logout() {
-    this._ngAuth.auth.signOut().then(() => { localStorage.setItem('userDetails', null); });
+    this._ngAuth.auth.signOut();
   }
   saveUser(user) {
     let _users = this._ngDatabase.list('users', {
@@ -46,10 +46,10 @@ export class LoginService {
       if (!data.length) {
         _users.push({ id: user.uid, name: user.displayName });
       }
-      this.routeToTask();
+      //this.routeToTask();
     }, (error) => {
-      this.routeToLogin();
-    })
+      //this.routeToLogin();
+    });
 
   }
   routeToLogin() {
