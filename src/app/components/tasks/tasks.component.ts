@@ -34,7 +34,7 @@ export class TasksComponent {
         this.getTasks();
         return;
       }
-      this.userDetails = null;
+      this.userDetails = new Object();
     })
   }
   getTasks() {
