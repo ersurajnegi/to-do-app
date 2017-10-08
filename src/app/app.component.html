@@ -2,7 +2,7 @@
   <div class="nav-wrapper">
     <a href="#!" class="navbar-brand">To Do App</a>
     <ul class="right" *ngIf="_user.userDetails">
-      <!-- <li><a> Welcome, {{userDetails.displayName}} </a></li> -->
+       <li><a> Welcome, {{_user.userDetails.displayName}} </a></li> 
       <li><a (click)="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i> Log out</a></li>
     </ul>
   </div>
@@ -11,8 +11,5 @@
 <div class=" loader-container">
   <div class="container">
     <router-outlet></router-outlet>
-    <!-- <app-loader></app-loader> -->
   </div>
-  <!-- Router Outlet -->
-
 </div>

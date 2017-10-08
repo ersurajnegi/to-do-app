@@ -1,4 +1,5 @@
-import { LoginService } from './../../services/login.service';
+import { UserService } from './../../services/user.service';
+
 
 import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from '../../api.service';
@@ -18,28 +19,23 @@ export class TasksComponent {
   $key: null;
   constructor(
     private _apiService: ApiService,
-    private _login: LoginService) {
+    private _user: UserService) {
 
   }
 
   ngOnInit() {
-    //this.getUserDetails();
+    this.getUserDetails();
     console.log("Task component");
-    
+
   }
 
   getUserDetails() {
     this.isLoading = true;
-    this._login._userDetails.subscribe((data) => {
-      if (data) {
-        this.userDetails.id = data.uid;
-        this.getTasks();
-        return;
-      }
-      this.userDetails = new Object();
-      this._login.routeToLogin();
-    })
+    this.userDetails.id = this._user.userDetails.uid;
+    this.getTasks();
+    return;
   }
+  
   getTasks() {
     this._apiService.getData({ id: this.userDetails.id })
       .subscribe(data => {

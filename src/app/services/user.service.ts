@@ -6,10 +6,15 @@ import { LoginService } from '../services/login.service';
 export class UserService {
   userDetails: any = null;
 
-  constructor(private _login: LoginService, private _router : Router) {
+  constructor(private _login: LoginService, private _router: Router) {
     this._login._userDetails.subscribe((data) => {
-      this.userDetails = data;
-      this._router.navigate(['/tasks']);
+      if (data) {
+        this.userDetails = data;
+        this._router.navigate(['/tasks']);
+        return;
+      }
+      this.userDetails = null;
+      this._router.navigate(['/login']);
     });
   }
 }

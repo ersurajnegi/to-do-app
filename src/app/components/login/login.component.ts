@@ -6,20 +6,12 @@ import { LoginService } from '../../services/login.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-  //showLoader: boolean = true;
+export class LoginComponent {
+  showLoader: boolean = false;
   constructor(private _login: LoginService) { }
 
-  ngOnInit() {
-    // this._login._userDetails.subscribe((data) => {
-    //   this.showLoader = false;
-    //   if (data) {
-    //     this._login.routeToTask();
-    //     this._login.saveUser(data);
-    //   }
-    // });
-  }
   doLogin(resource) {
+    this.showLoader = true;
     this._login.login(resource);
   }
 }

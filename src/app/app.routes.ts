@@ -6,7 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 const routesForApp: Routes = [
-  { path: 'login', component: LoginComponent, canActivate: [AuthGuardService] },
+  { path: 'login', component: LoginComponent },
   { path: 'tasks', component: TasksComponent, canActivate: [AuthGuardService]  },
   {
     path: '', redirectTo: '/login', pathMatch: 'full'
