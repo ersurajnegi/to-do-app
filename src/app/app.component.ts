@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent {
   title: string = 'To Do App';
-  constructor(private _login: LoginService, private _user : UserService) { }
+  constructor(private _login: LoginService, public _user : UserService) { }
   navbarClass: string = "my-navbar";
   logout() {
     this._login.logout();
