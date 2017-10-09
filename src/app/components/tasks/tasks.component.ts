@@ -23,7 +23,9 @@ export class TasksComponent {
   }
 
   ngOnInit() {
-    this.getUserDetails();
+    //this.getUserDetails();
+    console.log("Task component");
+    
   }
 
   getUserDetails() {

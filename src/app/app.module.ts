@@ -1,3 +1,4 @@
+import { AuthGuardService } from './auth-guard.service';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -6,8 +7,10 @@ import { AngularFireModule } from "angularfire2";
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
+
 import { ApiService } from './api.service';
 import { LoginService } from './services/login.service';
+import { UserService } from './services/user.service';
 import { AppComponent } from './app.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { AddEditComponent } from './components/add-edit/add-edit.component';
@@ -43,7 +46,7 @@ const firebaseConfig = {
     routes,
     FormsModule
   ],
-  providers: [ApiService, LoginService],
+  providers: [ApiService, LoginService,UserService,AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -7,17 +7,17 @@ import { LoginService } from '../../services/login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  showLoader: boolean = true;
+  //showLoader: boolean = true;
   constructor(private _login: LoginService) { }
 
   ngOnInit() {
-    this._login._userDetails.subscribe((data) => {
-      this.showLoader = false;
-      if (data) {
-        this._login.routeToTask();
-        this._login.saveUser(data);
-      }
-    });
+    // this._login._userDetails.subscribe((data) => {
+    //   this.showLoader = false;
+    //   if (data) {
+    //     this._login.routeToTask();
+    //     this._login.saveUser(data);
+    //   }
+    // });
   }
   doLogin(resource) {
     this._login.login(resource);

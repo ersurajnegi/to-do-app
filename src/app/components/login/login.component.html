@@ -7,10 +7,10 @@
       <h1 class="text-center login-title">
         Please Login
       </h1>
-      <div class="divider"></div>
+      <!-- <div class="divider"></div> -->
 
-      <form class="col s12">
-        <div class="row">
+      <!-- <form class="col s12">
+         <div class="row">
           <div class="input-field col s12">
             <input id="email" type="email" class="validate">
             <label for="email">Email:</label>
@@ -19,8 +19,8 @@
             <input id="password" type="password" class="validate">
             <label for="password">Password:</label>
           </div>
-        </div>
-        <div class="row">
+        </div> 
+         <div class="row">
           <div class="col s4 m6">
             <a class="btn waves-effect waves-light">Login</a>
           </div>
@@ -31,12 +31,25 @@
             </div>
           </div>
 
-        </div>
-        <div>
+        </div> 
+         <div>
           <label class="notice">*Only Google Login is available right now, Rest will be coming soon.<i class="fa fa-bicycle" aria-hidden="true"></i></label>
-        </div>
-      </form>
+        </div> 
+        
+      </form> -->
 
+      <div class="row">
+          <div class="col s6 push-s3 box"  (click)="doLogin('google')"> 
+            <a class="fa fa-google"></a>
+            Login with Google
+          </div>
+      </div>
+        <div class="row">
+          <div class="col s6 push-s3 box" (click)="doLogin('fb')">
+            <a class="fa fa-facebook" ></a>
+            Login with Facebook
+          </div>
+        </div>
     </div>
 
   </div>

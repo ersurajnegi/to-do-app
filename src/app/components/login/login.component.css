@@ -59,3 +59,10 @@ a.btn
 {
     color:#26a69a;
 }
+.box
+{
+        padding-top: 5px;
+    box-shadow: -2px 1px 15px rgba(0, 0, 0, 0.3);
+    padding-bottom: 5px;
+    cursor: pointer;
+}
